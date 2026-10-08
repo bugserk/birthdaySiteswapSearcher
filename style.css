@@ -1,0 +1,973 @@
+
+/* ========================================
+    基本設定
+    ======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+
+    font-family:
+    "Noto Sans JP",
+    "Yu Gothic",
+    "Hiragino Kaku Gothic ProN",
+    sans-serif;
+
+    color: #20232a;
+
+    background:
+    radial-gradient(
+        circle at 15% 5%,
+        #eef3ff 0%,
+        transparent 35%
+    ),
+    radial-gradient(
+        circle at 85% 25%,
+        #f5edff 0%,
+        transparent 35%
+    ),
+    #f7f8fc;
+
+    min-height: 100vh;
+}
+
+
+/* ========================================
+    ページ全体
+    ======================================== */
+
+.container {
+    width: min(920px, calc(100% - 32px));
+
+    margin: 0 auto;
+
+    padding:
+    60px
+    0
+    80px;
+}
+
+
+/* ========================================
+    タイトル
+    ======================================== */
+
+.header {
+    text-align: center;
+
+    margin-bottom: 45px;
+}
+
+.title {
+    margin: 0;
+
+    font-size:
+    clamp(32px, 7vw, 56px);
+
+    line-height: 1.2;
+
+    font-weight: 800;
+
+    letter-spacing: 0.04em;
+
+    background:
+    linear-gradient(
+        120deg,
+        #536dfe,
+        #8e5cff,
+        #d957ff
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.subtitle {
+    margin:
+    14px
+    0
+    0;
+
+    color: #777d8a;
+
+    font-size: 15px;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* ========================================
+    入力
+    ======================================== */
+
+.search-card {
+    background:
+    rgba(255, 255, 255, 0.9);
+
+    border:
+    1px solid
+    rgba(255, 255, 255, 0.9);
+
+    border-radius: 24px;
+
+    padding: 32px;
+
+    box-shadow:
+    0 15px 40px
+    rgba(40, 45, 70, 0.08),
+
+    0 2px 8px
+    rgba(40, 45, 70, 0.04);
+
+    backdrop-filter: blur(10px);
+
+    text-align: center;
+}
+
+.search-title {
+    margin:
+    0
+    0
+    24px;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}
+
+.input-row {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.date-input {
+    width: 110px;
+
+    height: 52px;
+
+    border:
+    2px solid
+    #e3e6ef;
+
+    border-radius: 14px;
+
+    background: #fafbfe;
+
+    text-align: center;
+
+    font-size: 20px;
+
+    font-weight: 600;
+
+    outline: none;
+
+    transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+}
+
+.date-input:focus {
+    background: white;
+
+    border-color: #6c63ff;
+
+    box-shadow:
+    0 0 0 4px
+    rgba(108, 99, 255, 0.12);
+}
+
+.date-label {
+    color: #666b78;
+
+    font-size: 16px;
+}
+
+.search-button {
+    height: 52px;
+
+    padding:
+    0
+    28px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #5d6cff,
+        #895cff
+    );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+    0 8px 20px
+    rgba(96, 87, 255, 0.25);
+
+    transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+
+.search-button:hover {
+    transform:
+    translateY(-2px);
+
+    box-shadow:
+    0 12px 24px
+    rgba(96, 87, 255, 0.32);
+}
+
+.search-button:active {
+    transform:
+    translateY(0);
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 10px 18px;
+
+  margin-top: 22px;
+}
+
+
+/* チェックボックス全体 */
+
+.checkbox {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 8px 12px;
+
+  border-radius: 10px;
+
+  color: #555a67;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.checkbox:hover {
+  background: #f3f2ff;
+}
+
+
+/* 元のチェックボックスを隠す */
+
+.checkbox input {
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+/* チェック部分 */
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #d5d7e0;
+
+  border-radius: 6px;
+
+  background: white;
+
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+
+/* チェックされた状態 */
+
+.checkbox input:checked + .checkmark {
+  background: #6c63ff;
+
+  border-color: #6c63ff;
+}
+
+
+/* ✓ */
+
+.checkbox input:checked + .checkmark::after {
+  content: "✓";
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  line-height: 1;
+}
+
+
+/* 選択時の文字 */
+
+.checkbox:has(input:checked) {
+  color: #5d55d9;
+
+  font-weight: 600;
+}
+
+
+/* ========================================
+    結果
+    ======================================== */
+
+.result {
+    margin-top: 50px;
+}
+
+.result-header {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.result-date {
+    margin: 0;
+
+    font-size:
+    clamp(24px, 5vw, 36px);
+
+    font-weight: 800;
+}
+
+.result-count {
+    margin:
+    8px
+    0
+    0;
+
+    color: #777d8a;
+
+    font-size: 15px;
+}
+
+.result-count strong {
+    color: #675cff;
+
+    font-size: 20px;
+}
+
+
+/* ========================================
+    サイトスワップ一覧
+    ======================================== */
+
+.pattern-grid {
+    display: grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fill,
+        minmax(150px, 1fr)
+    );
+
+    gap: 14px;
+}
+
+.pattern-card {
+    position: relative;
+
+    min-height: 110px;
+
+    padding: 22px 15px;
+
+    background: white;
+
+    border:
+    1px solid
+    #e8e9f0;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    box-shadow:
+    0 5px 15px
+    rgba(40, 45, 70, 0.05);
+
+    transition:
+    transform 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.pattern-card:hover {
+    transform:
+    translateY(-4px);
+
+    border-color:
+    #837aff;
+
+    box-shadow:
+    0 12px 25px
+    rgba(80, 75, 160, 0.12);
+}
+
+/* 選択中 */
+.pattern-card.selected {
+    border:
+    2px solid
+    #6c63ff;
+
+    background:
+    #f8f7ff;
+
+    box-shadow:
+    0 8px 25px
+    rgba(108, 99, 255, 0.15);
+}
+
+.pattern {
+    font-family:
+    "JetBrains Mono",
+    "Consolas",
+    monospace;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    color: #292c35;
+}
+
+.pattern-description {
+    margin-top: 8px;
+
+    color: #979ba7;
+
+    font-size: 12px;
+}
+
+.play-icon {
+    position: absolute;
+
+    right: 12px;
+
+    bottom: 10px;
+
+    font-size: 12px;
+
+    color: #7770ff;
+}
+
+
+/* ========================================
+    アニメーション
+    ======================================== */
+
+.animation-panel {
+    margin-top: 25px;
+
+    width: 100%;
+
+    /*
+    * スマホでも縦長になりすぎないように
+    * aspect-ratioを使用
+    */
+    aspect-ratio: 16 / 9;
+
+    min-height: 260px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: white;
+
+    border-radius: 24px;
+
+    color: #161922;
+
+    overflow: hidden;
+
+    box-shadow:
+    0 15px 40px
+    rgba(20, 22, 30, 0.15);
+}
+
+.animation-placeholder {
+    aspect-ratio: 1 / 1;
+
+    width: 55%;
+
+    text-align: center;
+
+    color: #8e93a3;
+
+    padding: 20px;
+
+    line-height: 1.7;
+}
+
+.animation-placeholder .icon {
+    font-size: 45px;
+
+    margin-bottom: 10px;
+}
+
+
+/* ========================================
+    説明
+    ======================================== */
+
+.info {
+    margin-top: 70px;
+}
+
+.info-title {
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    font-size: 24px;
+
+    font-weight: 800;
+}
+
+.info-item {
+    background: white;
+
+    border:
+    1px solid
+    #e8e9f0;
+
+    border-radius: 16px;
+
+    margin-bottom: 10px;
+
+    overflow: hidden;
+
+    box-shadow:
+    0 3px 10px
+    rgba(40, 45, 70, 0.03);
+}
+
+.info-button {
+    width: 100%;
+
+    display: flex;
+
+    justify-content:
+    space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding:
+    20px 22px;
+
+    border: none;
+
+    background: white;
+
+    color: #30333b;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.info-button:hover {
+    background:
+    #fafaff;
+}
+
+.info-icon {
+    flex-shrink: 0;
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+    #f0efff;
+
+    color:
+    #665cff;
+
+    font-size: 20px;
+
+    transition:
+    transform 0.2s;
+}
+
+.info-content {
+    display: none;
+
+    padding:
+    0
+    22px
+    22px;
+
+    color: #686d79;
+
+    font-size: 14px;
+
+    line-height: 1.9;
+}
+
+.info-item.open
+.info-content {
+    display: block;
+}
+
+.info-item.open
+.info-icon {
+    transform:
+    rotate(45deg);
+}
+
+
+/* ========================================
+    ライブラリ
+    ======================================== */
+
+.libraries {
+    margin-top: 70px;
+}
+
+.libraries-title {
+    text-align: center;
+
+    margin:
+    0
+    0
+    25px;
+
+    font-size: 24px;
+
+    font-weight: 800;
+}
+
+.library-list {
+    display: grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(220px, 1fr)
+    );
+
+    gap: 12px;
+}
+
+.library-card {
+    display: block;
+
+    padding: 18px;
+
+    background: white;
+
+    border:
+    1px solid
+    #e8e9f0;
+
+    border-radius: 16px;
+
+    color: inherit;
+
+    text-decoration: none;
+
+    transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+
+.library-card:hover {
+    transform:
+    translateY(-3px);
+
+    border-color:
+    #837aff;
+
+    box-shadow:
+    0 8px 20px
+    rgba(40, 45, 70, 0.08);
+}
+
+.library-name {
+    font-weight: 700;
+
+    font-size: 16px;
+
+    color: #30333b;
+}
+
+.library-description {
+    margin-top: 6px;
+
+    color: #858995;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+    フッター
+    ======================================== */
+
+footer {
+    margin-top: 70px;
+
+    text-align: center;
+
+    color: #9a9eaa;
+
+    font-size: 12px;
+}
+
+
+/* ========================================
+    スマートフォン
+    ======================================== */
+
+@media (max-width: 600px) {
+
+    .container {
+    width:
+        calc(100% - 24px);
+
+    padding:
+        35px
+        0
+        55px;
+    }
+
+    .header {
+    margin-bottom: 30px;
+    }
+
+    .title {
+    font-size:
+        clamp(30px, 9vw, 42px);
+
+    letter-spacing:
+        0.02em;
+    }
+
+    .subtitle {
+    font-size: 13px;
+
+    line-height: 1.7;
+    }
+
+
+    /* 入力カード */
+
+    .search-card {
+    padding:
+        24px
+        16px;
+
+    border-radius: 20px;
+    }
+
+    .search-title {
+    font-size: 16px;
+
+    margin-bottom: 20px;
+    }
+
+    .input-row {
+    display: grid;
+
+    grid-template-columns:
+        1fr auto 1fr auto;
+
+    gap: 7px;
+
+    width: 100%;
+    }
+
+    .date-input {
+    width: 100%;
+
+    min-width: 0;
+
+    height: 48px;
+
+    font-size: 18px;
+    }
+
+    .date-label {
+    font-size: 14px;
+    }
+
+    .search-button {
+    grid-column:
+        1 / -1;
+
+    width: 100%;
+
+    height: 48px;
+
+    margin-top: 5px;
+    }
+
+
+    /* 結果 */
+
+    .result {
+    margin-top: 38px;
+    }
+
+    .result-date {
+    font-size: 25px;
+    }
+
+    .result-count {
+    font-size: 14px;
+    }
+
+
+    /* パターン */
+
+    .pattern-grid {
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+    }
+
+    .pattern-card {
+    min-height: 95px;
+
+    padding:
+        18px
+        10px;
+    }
+
+    .pattern {
+    font-size: 19px;
+    }
+
+
+    /* アニメーション */
+
+    .animation-panel {
+    aspect-ratio:
+        1 / 1;
+
+    min-height: 0;
+
+    border-radius: 20px;
+    }
+
+    
+    .animation-placeholder {
+        width: 100%;
+    }
+
+
+    /* 説明 */
+
+    .info {
+    margin-top: 55px;
+    }
+
+    .info-title,
+    .libraries-title {
+    font-size: 22px;
+    }
+
+    .info-button {
+    padding:
+        17px;
+
+    font-size: 14px;
+    }
+
+    .info-content {
+    padding:
+        0
+        17px
+        18px;
+
+    font-size: 13px;
+    }
+
+
+    /* ライブラリ */
+
+    .libraries {
+    margin-top: 55px;
+    }
+
+    .library-list {
+    grid-template-columns:
+        1fr;
+    }
+
+    .library-card {
+    padding: 16px;
+    }
+
+}
