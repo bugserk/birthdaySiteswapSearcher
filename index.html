@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>誕生日サイトスワップサーチャー</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://app.7131.jp/jmotion/v20/jmotion.js"></script>
+    <script src="JugglableBirthdaySiteswapCalculator.js"></script>
+</head>
+
+
+<body>
+    <main class="container">
+        <!--タイトル-->
+        <header class="header">
+            <h1 class="title">
+                誕生日サイトスワップ<br>
+                サーチャー
+            </h1>
+            <p class="subtitle">
+                あなたの誕生日からサイトスワップを探そう
+            </p>
+        </header>
+
+        <!--入力-->
+        <section class="search-card">
+            <h2 class="search-title">
+                誕生日を入力してください
+            </h2>
+            <div class="input-row">
+                <input id="month" class="date-input" type="number" min="1" max="12">
+                <span class="date-label">
+                    月
+                </span>
+                <input id="day" class="date-input" type="number" min="1" max="31">
+                <span class="date-label">
+                    日
+                </span>
+            </div>
+
+            <div class="options">
+                <label class="checkbox">
+                    <input type="checkbox" name="useAlp" checked>
+                    <span class="checkmark"></span>
+                    アルファベット変換を許可
+                </label>
+            </div>
+            <br>
+
+            <div class="input-row">
+                <button class="search-button" id="search-button">
+                    サーチ
+                </button>
+            </div>
+        </section>
+
+
+        <!--結果表示-->
+
+        <section class="result" id="result">
+            <div class="result-header">
+                <h2 class="result-date" id="result-date">
+                    〇月〇日のサイトスワップ
+                </h2>
+                <p class="result-count" id="result-count">
+                    <strong>0</strong> 個ヒット
+                </p>
+            </div>
+
+            <!-- パターン一覧 -->
+            <div class="pattern-grid" id="pattern-grid">
+                <!-- 例
+                <div class="pattern-card selected">
+                    <div class="pattern">531</div>
+                    <div class="pattern-description">
+                        サイトスワップ
+                    </div>
+                    <div class="play-icon">
+                        ▶
+                    </div>
+                </div>
+                -->
+            </div>
+        </section>
+        
+        <!-- アニメーション -->
+        <div class="animation-panel">
+            <svg class="animation-placeholder" id="animation-placeholder"></svg>
+        </div>
+
+        <!--説明-->
+        <section class="info">
+            <h2 class="info-title">
+                INFORMATION
+            </h2>
+            <div class="info-item">
+                <button class="info-button">
+                    <span>
+                        ？ サイトスワップとは？
+                    </span>
+                    <span class="info-icon">
+                        ＋
+                    </span>
+                </button>
+                <div class="info-content">
+                    サイトスワップは、ジャグリングのパターンを数列で表現する記法です。数字は投げる高さ（投げたボールが何拍後に再び投げられるか）を表します。<br><br>
+                    より詳しく知りたい方は以下のサイトがおすすめです。<br><br>
+                    日本ジャグリング協会『サイトスワップ』<br>
+                    <a href="https://www.juggling.jp/siteswap/" target="_blank">https://www.juggling.jp/siteswap/</a><br><br>
+
+                    Juggle Wiki 『Siteswap』<br>
+                    <a href="https://juggle.fandom.com/wiki/Siteswap" target="_blank">https://juggle.fandom.com/wiki/Siteswap</a>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <button class="info-button">
+                    <span>
+                        ？ 誕生日サイトスワップとは？
+                    </span>
+                    <span class="info-icon">
+                        ＋
+                    </span>
+                </button>
+                <div class="info-content">
+                    誕生日を4桁の数字（例：4月13日 → 0413）に変換し、その数字を順番に含むジャグリング可能なサイトスワップを「誕生日サイトスワップ」とします。<br>
+                    マルチスローも含めることで、どの誕生日にも1つ以上のパターンが見つかります。
+                </div>
+            </div>
+
+            <div class="info-item">
+                <button class="info-button">
+                    <span>
+                        ？ 「アルファベット変換を許可」とは？
+                    </span>
+                    <span class="info-icon">
+                        ＋
+                    </span>
+                </button>
+                <div class="info-content">
+                    「アルファベット変換を許可」にチェックを入れると、10 → a、12 → c、31 → vのように、2桁の数字をアルファベット変換することをを許して検索を行います。<br>
+                    ヒット数は増えますが、人間には難しいサイトスワップも多いです。
+                </div>
+            </div>
+
+            <div class="info-item">
+                <button class="info-button">
+                    <span>
+                        ？ ニコイチが表示されないんだけど？
+                    </span>
+                    <span class="info-icon">
+                        ＋
+                    </span>
+                </button>
+                <div class="info-content">
+                    制作者の技術不足によりニコイチはボールが重なって1つに見えてしまいます。心の目で見てください。
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <button class="info-button">
+                    <span>
+                        ？ ランキング1位と最下位の日付は？
+                    </span>
+                    <span class="info-icon">
+                        ＋
+                    </span>
+                </button>
+                <div class="info-content">
+                    アルファベット変換ありの場合、誕生日サイトスワップが最も多いのは2月28日で42個です。<br>
+                    最も少ないのは4月1日、4月3日、4月7日、4月9日、5月2日、5月6日、5月8日、6月1日、6月5日、6月7日、7月4日、7月6日、8月3日、8月5日、8月9日、9月2日、9月4日、9月8日で、1個です。<br><br>
+
+                    すべての桁が偶数かつ、2か所でアルファベット変換可能な2月20日台がSyncのヒット数を伸ばし上位を占めました。<br>
+                    逆にアルファベット変換できる箇所がない4~9月の0日台が下位を占める結果となりました。
+                </div>
+            </div>
+
+            <div class="info-item">
+                <button class="info-button">
+                    <span>
+                        ？ このサイトについて
+                    </span>
+                    <span class="info-icon">
+                        ＋
+                    </span>
+                </button>
+                <div class="info-content">
+                    このサイトは、入力された文字列を含むジャグリング可能なサイトスワップを探すサイトです。
+                </div>
+            </div>
+        </section>
+
+
+        <!--ライブラリ-->
+
+        <section class="libraries">
+            <h2 class="libraries-title">
+                LIBRARIES
+            </h2>
+            <div class="library-list">
+                <a class="library-card" href="https://app.7131.jp/jmotion/v20/" target="_blank" rel="noopener">
+
+                    <div class="library-name">
+                        jmotion
+                    </div>
+
+                    <div class="library-description">
+                        サイトスワップのアニメーション表示に使用しています。
+                    </div>
+                </a>
+
+            </div>
+
+        </section>
+
+        <footer>
+            Birthday Siteswap Searcher
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
